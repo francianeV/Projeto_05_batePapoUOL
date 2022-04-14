@@ -86,6 +86,7 @@ body{
 }
 
 .corpo-mensagens li{
+    flex-wrap: wrap;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 5px;

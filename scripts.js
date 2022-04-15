@@ -8,6 +8,7 @@ entradaChat();
 pegarConversas();
 setInterval(pegarConversas, 3000);
 setInterval(manterConexao,4000);
+//perguntarNome();
 
 function pegarConversas(){
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
@@ -51,23 +52,48 @@ function entradaChat(){
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants",name);
 
     promise.then(pegarConversas);
-   // promise.catch(tratarErro);
+    //promise.catch(tratarErro);
     
 }
 /*
 function tratarErro(error){
-
-    if(error.response.status === 400){
-        pedeNome = prompt("digite outro nome: ");
-    }else{
-        return pegarConversas();
+    
+    //const pedeNome = prompt("Digite seu nome: ");
+   
+    while(pedeNome === error.response.from){
+        const pedeNome = prompt("Digite seu nome: ");
     }
 
+    return pegarConversas();
 }
 */
-
 function manterConexao(){
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/status",name);
 
     promise.then(pegarConversas);
+}
+
+function enviarMensagem(){
+    console.log('indo');
+    const mensagem = document.querySelector("input").value;
+
+    const mensagemT = {from: pedeNome,
+	to: "Todos",
+	text: mensagem,
+	type: "message"};
+
+    const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",mensagemT);
+
+
+    promise.then(pegarConversas);
+    promise.catch(erroMensagem);
+
+}
+
+function erroMensagem(error){
+    if(error.response.status !== 200){
+        window.location.reload()
+    }
+    return enviarMensagem();
+
 }

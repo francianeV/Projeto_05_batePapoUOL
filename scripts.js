@@ -33,20 +33,21 @@ function renderizarConversas(){
     ulMensagems.innerHTML = "";
 
     for (let i = 0; i < conversas.length; i++) {
+        if(conversas[i].type === "message"){
         ulMensagems.innerHTML += `
-            <li><span class="time">${conversas[i].time}&nbsp&nbsp</span> <span class="from"> ${conversas[i].from}&nbsp&nbsp</span> <span class="text"> ${conversas[i].text} </span></li>
+            <li class="normal"><span class="time">${conversas[i].time}&nbsp&nbsp</span> <span class="from"> ${conversas[i].from}&nbsp&nbsp</span> para&nbsp<span class="from"> ${conversas[i].to}:&nbsp&nbsp</span>  <span class="text"> ${conversas[i].text} </span></li>
+        `;
+    }else if(conversas[i].type === "private_message"){
+        ulMensagems.innerHTML += `
+            <li class="reservada"><span class="time">${conversas[i].time}&nbsp&nbsp</span> <span class="from"> ${conversas[i].from}&nbsp&nbsp</span> reservadamente &nbsp para &nbsp<span class="from">${conversas[i].to}:&nbsp&nbsp</span><span class="text"> ${conversas[i].text} </span></li>
+        `;
+    }else if(conversas[i].type === "status"){
+        ulMensagems.innerHTML += `
+            <li class="status"><span class="time">${conversas[i].time}&nbsp&nbsp</span> <span class="from"> ${conversas[i].from}&nbsp&nbsp</span><span class="text"> ${conversas[i].text} </span></li>
         `;
     }
 }
-/*
-function comparaMensagens(){
-    if(conversas[i].text === "entra na sala..." || conversas[i].text === "sai da sala..."){
-        let elemento = elemento.document.querySelectorAll(".corpo-mensagens .li");
-        elemento.style.background = "gray";
-        
-    }
 }
-*/
 
 function entradaChat(){
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants",name);
@@ -84,9 +85,14 @@ function enviarMensagem(){
 
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",mensagemT);
 
-
+    mensagem.addEventListener('keydown', (event) => {
+        const keyName = event.key;
+        alert('keydown event\n\n' + 'key: ' + keyName);
+      });
+      
     promise.then(pegarConversas);
     promise.catch(erroMensagem);
+
 
 }
 
@@ -97,3 +103,8 @@ function erroMensagem(error){
     return enviarMensagem();
 
 }
+
+function limpar() {
+    document.querySelector("input").value = "";
+}
+

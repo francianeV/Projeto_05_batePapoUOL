@@ -13,6 +13,30 @@
     <title>Projeto_05_batePapoUOL</title>
 </head>
 <body>
+<div class="conteiner-bonus">
+    <div class="fundo"></div>
+    <div class="menu-lateral">
+        <div class="texto">Escolha um contato para enviar mensagem:</div>
+        <div class="usuarios-online">
+            <div class="topinho">
+                <ion-icon name="people"></ion-icon>
+                <h4>Todos</h4>
+            </div>
+            <div class="online"></div>
+        </div>
+        <div class="tipo-mensagem">
+            <p>Escolha a visibilidade:</p>
+            <div class="publica">
+                <ion-icon name="lock-open"></ion-icon>
+                <p>Público</p>
+            </div>
+            <div class="privada">
+                <ion-icon name="lock-closed"></ion-icon>
+                <p>Reservadamente</p>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="conteiner">
     <div class="topo">
         <img src="img/logo 1.png" />
@@ -25,10 +49,9 @@
 
     <div class="enviar-mensagem">
         <input placeholder="Escreva aqui...">
-        <ion-icon onclick="enviarMensagem()" name="paper-plane-outline"></ion-icon>
+        <ion-icon onclick="enviarMensagem();limpar()" name="paper-plane-outline"></ion-icon>
     </div>
 </div>
-      
 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 

@@ -88,10 +88,6 @@ function enviarMensagem(){
 
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",mensagemT);
 
-    mensagem.addEventListener('keydown', (event) => {
-        const keyName = event.key;
-        alert('keydown event\n\n' + 'key: ' + keyName);
-      });
       
     promise.then(pegarConversas,1000);
     promise.catch(erroMensagem);
@@ -145,13 +141,19 @@ function usuariosOnline(){
 
 function selecionar(usuario){
     const usuarioSelecionado = document.querySelector(".selecionado");
+   // let toUser = document.querySelector(".destinarario");
+
     if(usuarioSelecionado !== null){
         usuarioSelecionado.classList.remove("selecionado");
 
     }
 
     usuario.classList.add("selecionado");
-    destinatario = usuario.querySelector("p").innerHTML;
+
+    if(usuario.classList.contains("selecionado")){
+    destinatario = usuario.querySelector('p').innerHTML;
+   // toUser.innerHTML = `Enviando para ${destinatario} (reservadamente) dwed`;
+    }
 }
 
 function selecionarMensagem(mensagem){
@@ -162,6 +164,22 @@ function selecionarMensagem(mensagem){
     }
 
     mensagem.classList.add("selecionadoMensagem");
+
     tipoMensagem = mensagem.querySelector("p").innerHTML;
 
 }
+
+function destino(){
+    const destinatarioT = document.querySelector(".destinatario").innerHTML = `<p>Enviando para ${destinatario} (reservadamente)</p>`;
+}
+destino();
+
+document.onkeydown = enter;
+function enter(event){
+    if(event.keyCode === 13){
+        enviarMensagem();
+    }
+
+    
+}
+

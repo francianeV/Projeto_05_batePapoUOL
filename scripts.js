@@ -1,8 +1,8 @@
 let conversas = [];
 const pedeNome = prompt("Digite seu nome: ");
 const name = {name: pedeNome};
-let destinatario = 'Todos';
-let tipoMensagem = 'message'
+let destinatario = "Todos";
+let tipoMensagem = 'message';
 
 
 
@@ -10,7 +10,6 @@ entradaChat();
 pegarConversas();
 setInterval(pegarConversas, 1000);
 setInterval(manterConexao,4000);
-//perguntarNome();
 usuariosOnline();
 
 function pegarConversas(){
@@ -42,7 +41,7 @@ function renderizarConversas(){
         `;
     }else if(conversas[i].type === "private_message"){
         ulMensagems.innerHTML += `
-            <li class="reservada"><span class="time">${conversas[i].time}&nbsp&nbsp</span> <span class="from"> ${conversas[i].from}&nbsp&nbsp</span> reservadamente &nbsp para &nbsp<span class="from">${conversas[i].to}:&nbsp&nbsp</span><span class="text"> ${conversas[i].text} </span></li>
+            <li class="reservada"><span class="time">${conversas[i].time}&nbsp&nbsp</span> <span class="from"> ${conversas[i].from}&nbsp&nbsp</span> reservadamente para &nbsp<span class="from">${conversas[i].to}:&nbsp&nbsp</span><span class="text"> ${conversas[i].text} </span></li>
         `;
     }else if(conversas[i].type === "status"){
         ulMensagems.innerHTML += `
@@ -56,21 +55,25 @@ function entradaChat(){
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants",name);
 
     promise.then(pegarConversas);
-    //promise.catch(tratarErro);
+    promise.catch(tratarErro);
     
 }
-/*
 function tratarErro(error){
     
-    //const pedeNome = prompt("Digite seu nome: ");
-   
-    while(pedeNome === error.response.from){
-        const pedeNome = prompt("Digite seu nome: ");
+    let status = error.response.status;
+    console.log(status);
+    if(status === 400){
+        outroNome();
     }
-
-    return pegarConversas();
 }
-*/
+
+function outroNome(response){
+
+    alert("Nome em uso!");
+    const pedeNome = prompt("Digite outro nome: ");
+    
+}
+
 function manterConexao(){
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/status",name);
 
@@ -82,12 +85,12 @@ function enviarMensagem(){
     const mensagem = document.querySelector("input").value;
 
     const mensagemT = {from: pedeNome,
-	to: "Todos",
+	to: destinatario,
 	text: mensagem,
-	type: "message"};
+	type: tipoMensagem};
 
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",mensagemT);
-
+        
       
     promise.then(pegarConversas,1000);
     promise.catch(erroMensagem);
@@ -97,6 +100,7 @@ function enviarMensagem(){
 
 function erroMensagem(error){
     if(error.response.status !== 200){
+        alert("Usuário não esta mais online");
         window.location.reload()
     }
     return enviarMensagem();
@@ -141,43 +145,50 @@ function usuariosOnline(){
 
 function selecionar(usuario){
     const usuarioSelecionado = document.querySelector(".selecionado");
-   // let toUser = document.querySelector(".destinarario");
-
+    
     if(usuarioSelecionado !== null){
         usuarioSelecionado.classList.remove("selecionado");
 
     }
 
     usuario.classList.add("selecionado");
+    destinatario = usuario.querySelector("p").innerHTML;
 
-    if(usuario.classList.contains("selecionado")){
-    destinatario = usuario.querySelector('p').innerHTML;
-   // toUser.innerHTML = `Enviando para ${destinatario} (reservadamente) dwed`;
+    if(destinatario === "Todos"){
+        document.querySelector(".publica").classList.add("selecionadoMensagem");
+        document.querySelector(".privado").classList.remove("selecionadoMensagem");
+        tipoMensagem = "message"
+        document.querySelector(".destinatario").innerHTML = `Enviando para ${destinatario} publicamente`;
+    }else{
+        document.querySelector(".privado").classList.add("selecionadoMensagem");
+        document.querySelector(".publica").classList.remove("selecionadoMensagem");
+        tipoMensagem = "private_message";
+        document.querySelector(".destinatario").innerHTML = `Enviando para ${destinatario} (reservadamente)`;
     }
-}
-
-function selecionarMensagem(mensagem){
-    const mensagemSelecionada = document.querySelector(".selecionadoMensagem");
-    if( mensagemSelecionada !== null){
-        mensagemSelecionada.classList.remove("selecionadoMensagem");
-
-    }
-
-    mensagem.classList.add("selecionadoMensagem");
-
-    tipoMensagem = mensagem.querySelector("p").innerHTML;
 
 }
 
+document.querySelector(".destinatario").innerHTML = `Enviando para ${destinatario} publicamente`;
+
+/*
 function destino(){
-    const destinatarioT = document.querySelector(".destinatario").innerHTML = `<p>Enviando para ${destinatario} (reservadamente)</p>`;
+    /*
+    if(destinatario !== "Todos"){
+        const destinatarioT = document.querySelector(".destinatario").innerHTML = `<p>Enviando para ${destinatario} (reservadamente)</p>`;
+    }
+    else{
+        const destinatarioT = document.querySelector(".destinatario").innerHTML = `<p>Enviando para todos publicamente</p>`
+    }
+    
 }
 destino();
+*/
 
 document.onkeydown = enter;
 function enter(event){
     if(event.keyCode === 13){
         enviarMensagem();
+        document.querySelector("input").value = "";
     }
 
     

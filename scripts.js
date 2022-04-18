@@ -160,29 +160,38 @@ function selecionar(usuario){
         tipoMensagem = "message"
         document.querySelector(".destinatario").innerHTML = `Enviando para ${destinatario} publicamente`;
     }else{
-        document.querySelector(".privado").classList.add("selecionadoMensagem");
-        document.querySelector(".publica").classList.remove("selecionadoMensagem");
+        selecionarMensagem();
+        //document.querySelector(".privado").classList.add("selecionadoMensagem");
+        //document.querySelector(".publica").classList.remove("selecionadoMensagem");
+        //tipoMensagem = "private_message";
+        
+    }
+
+}
+
+function selecionarMensagem(selecionaMensagem){
+const selecionandoMensagem = document.querySelector(".selecionadoMensagem");
+    
+    if(selecionandoMensagem !== null){
+        selecionandoMensagem.classList.remove("selecionadoMensagem");
+
+    }
+
+    selecionaMensagem.classList.add("selecionadoMensagem");
+    tipoMensagem = selecionaMensagem.querySelector("p").innerHTML;
+
+    if(tipoMensagem === "Público"){
+        tipoMensagem = "message";
+        document.querySelector(".destinatario").innerHTML = `Enviando para ${destinatario} publicamente`;
+    }else{
         tipoMensagem = "private_message";
         document.querySelector(".destinatario").innerHTML = `Enviando para ${destinatario} (reservadamente)`;
     }
 
+    
 }
 
 document.querySelector(".destinatario").innerHTML = `Enviando para ${destinatario} publicamente`;
-
-/*
-function destino(){
-    /*
-    if(destinatario !== "Todos"){
-        const destinatarioT = document.querySelector(".destinatario").innerHTML = `<p>Enviando para ${destinatario} (reservadamente)</p>`;
-    }
-    else{
-        const destinatarioT = document.querySelector(".destinatario").innerHTML = `<p>Enviando para todos publicamente</p>`
-    }
-    
-}
-destino();
-*/
 
 document.onkeydown = enter;
 function enter(event){

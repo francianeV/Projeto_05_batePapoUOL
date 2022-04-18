@@ -6,7 +6,7 @@ const name = {name: pedeNome};
 
 entradaChat();
 pegarConversas();
-setInterval(pegarConversas, 3000);
+setInterval(pegarConversas, 1000);
 setInterval(manterConexao,4000);
 //perguntarNome();
 
@@ -90,7 +90,7 @@ function enviarMensagem(){
         alert('keydown event\n\n' + 'key: ' + keyName);
       });
       
-    promise.then(pegarConversas);
+    promise.then(pegarConversas,1000);
     promise.catch(erroMensagem);
 
 
@@ -108,3 +108,13 @@ function limpar() {
     document.querySelector("input").value = "";
 }
 
+function menuLateral(){
+    const menu = document.querySelector(".conteiner-bonus");
+    menu.classList.remove("esconde");
+}
+
+function esconde(){
+    const menu = document.querySelector(".conteiner-bonus");
+    menu.classList.add("esconde");
+
+}

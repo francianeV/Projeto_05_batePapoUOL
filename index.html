@@ -13,8 +13,8 @@
     <title>Projeto_05_batePapoUOL</title>
 </head>
 <body>
-<div class="conteiner-bonus">
-    <div class="fundo"></div>
+<div class="conteiner-bonus esconde">
+    <div onclick="esconde()" class="fundo"></div>
     <div class="menu-lateral">
         <div class="texto">Escolha um contato para enviar mensagem:</div>
         <div class="usuarios-online">
@@ -40,7 +40,7 @@
 <div class="conteiner">
     <div class="topo">
         <img src="img/logo 1.png" />
-        <ion-icon name="people"></ion-icon>
+        <ion-icon onclick="menuLateral()" name="people"></ion-icon>
     </div>
     
     <ul class="corpo-mensagens">

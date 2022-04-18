@@ -179,6 +179,7 @@ body{
     height: 100%;
     flex-wrap: wrap;
     background-color: white;
+    overflow-x: auto;
 }
 
 .texto{
@@ -190,7 +191,7 @@ body{
     text-align: center;
     padding: 20px 45px;
 }
-
+/*
 .topinho{
     display: flex;
     padding: 15px 0;
@@ -204,7 +205,7 @@ body{
     line-height: 19px;
     display: flex;
 }
-
+*/
 
 ion-icon{
     Width: 24px;
@@ -245,4 +246,26 @@ ion-icon{
 
 .esconde{
     display: none;
+}
+
+.users{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.usuario{
+    display: flex;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.usuario:last-child{
+    padding-bottom: 20px;
 }

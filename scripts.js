@@ -1,6 +1,7 @@
 let conversas = [];
 const pedeNome = prompt("Digite seu nome: ");
 const name = {name: pedeNome};
+let userToSend = 'Todos';
 
 
 
@@ -9,6 +10,7 @@ pegarConversas();
 setInterval(pegarConversas, 1000);
 setInterval(manterConexao,4000);
 //perguntarNome();
+usuariosOnline();
 
 function pegarConversas(){
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
@@ -118,3 +120,25 @@ function esconde(){
     menu.classList.add("esconde");
 
 }
+
+function usuariosOnline(){
+    const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
+
+    promise.then(function(response){
+        let contador = 0;
+        let users = document.querySelector(".users");
+        users.innerHTML ="";
+
+        while(contador < response.data.length){
+            users.innerHTML += `<div class="usuario" onclick="selecionar(this)">
+            <ion-icon name="people"></ion-icon> <p>${response.data[contador].name}</p></div>`;
+            contador++;
+
+        }
+
+        setTimeout(usuariosOnline,10000)
+    });
+
+    
+}
+

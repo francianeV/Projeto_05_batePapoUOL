@@ -18,7 +18,8 @@
     <div class="menu-lateral">
         <div class="texto">Escolha um contato para enviar mensagem:</div>
         <div class="usuarios-online">
-            <div class="usuario" onclick="selecionar(this)">
+            <div class="usuario selecionado" onclick="selecionar(this)">
+                <img src="img/Vector.png" alt="selecionado">
                 <ion-icon name="people"></ion-icon> 
                 <p>Todos</p>
             </div>
@@ -26,11 +27,13 @@
         </div>
         <div class="tipo-mensagem">
             <p>Escolha a visibilidade:</p>
-            <div class="publica">
+            <div class="mensagem selecionadoMensagem" onclick="selecionarMensagem(this)">
+                <img src="img/Vector.png" alt="selecionado">
                 <ion-icon name="lock-open"></ion-icon>
                 <p>Público</p>
             </div>
-            <div class="privada">
+            <div class="mensagem" onclick="selecionarMensagem(this)">
+                <img src="img/Vector.png" alt="selecionado">
                 <ion-icon name="lock-closed"></ion-icon>
                 <p>Reservadamente</p>
             </div>

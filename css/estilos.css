@@ -224,7 +224,7 @@ ion-icon{
     padding: 20px 45px;
 }
 
-.publica {
+.mensagem {
     display: flex;
     font-family: 'Roboto';
     font-style: normal;
@@ -234,15 +234,6 @@ ion-icon{
     margin-bottom: 10px;
 }
 
-.privada {
-    display: flex;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    margin-bottom: 10px;
-}
 
 .esconde{
     display: none;
@@ -266,6 +257,30 @@ ion-icon{
     margin-bottom: 10px;
 }
 
+.usuario img{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 1%;
+    display: none;
+}
+
 .usuario:last-child{
     padding-bottom: 20px;
+}
+
+.usuario.selecionado img{
+    display: flex;
+}
+
+.mensagem img{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 1%;
+    display: none;
+}
+
+.mensagem.selecionadoMensagem img{
+    display: flex;
 }

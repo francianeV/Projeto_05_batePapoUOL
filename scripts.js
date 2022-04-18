@@ -1,7 +1,8 @@
 let conversas = [];
 const pedeNome = prompt("Digite seu nome: ");
 const name = {name: pedeNome};
-let userToSend = 'Todos';
+let destinatario = 'Todos';
+let tipoMensagem = 'message'
 
 
 
@@ -131,7 +132,7 @@ function usuariosOnline(){
 
         while(contador < response.data.length){
             users.innerHTML += `<div class="usuario" onclick="selecionar(this)">
-            <ion-icon name="people"></ion-icon> <p>${response.data[contador].name}</p></div>`;
+            <ion-icon name="people"></ion-icon> <p>${response.data[contador].name}</p><img src="img/Vector.png" alt="selecionado" /></div>`;
             contador++;
 
         }
@@ -142,3 +143,25 @@ function usuariosOnline(){
     
 }
 
+function selecionar(usuario){
+    const usuarioSelecionado = document.querySelector(".selecionado");
+    if(usuarioSelecionado !== null){
+        usuarioSelecionado.classList.remove("selecionado");
+
+    }
+
+    usuario.classList.add("selecionado");
+    destinatario = usuario.querySelector("p").innerHTML;
+}
+
+function selecionarMensagem(mensagem){
+    const mensagemSelecionada = document.querySelector(".selecionadoMensagem");
+    if( mensagemSelecionada !== null){
+        mensagemSelecionada.classList.remove("selecionadoMensagem");
+
+    }
+
+    mensagem.classList.add("selecionadoMensagem");
+    tipoMensagem = mensagem.querySelector("p").innerHTML;
+
+}

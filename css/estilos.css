@@ -202,7 +202,6 @@ body{
     height: 100%;
     flex-wrap: wrap;
     background-color: white;
-    overflow-x: auto;
 }
 
 .texto{
@@ -261,12 +260,19 @@ ion-icon{
 .esconde{
     display: none;
 }
-
+.usuarios-online{
+    width: 100%;
+    height: 650px;
+    overflow-x: auto;
+    
+}
 .users{
-    height: auto;
     width: 100%;
     display: flex;
     flex-direction: column;
+    
+    
+    
 }
 
 .usuario{
@@ -278,6 +284,7 @@ ion-icon{
     line-height: 19px;
     display: flex;
     margin-bottom: 10px;
+    word-wrap: break-word;
 }
 
 .usuario img{
